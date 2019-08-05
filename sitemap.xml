@@ -2,13 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://cognize.me/about/</loc>
-    
-    <lastmod>2019-08-05T13:10:25.230Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://cognize.me/series/index.html</loc>
     
     <lastmod>2019-07-12T13:58:07.769Z</lastmod>
@@ -26,6 +19,13 @@
     <loc>https://cognize.me/tags/index.html</loc>
     
     <lastmod>2017-09-13T08:12:41.583Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://cognize.me/about/</loc>
+    
+    <lastmod>2017-08-26T02:42:07.157Z</lastmod>
     
   </url>
   
