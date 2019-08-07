@@ -3,7 +3,6 @@ https://cognize.me/payspotify/
 https://cognize.me/djangopic/
 https://cognize.me/weibospider/
 https://cognize.me/matplotlibZn/
-https://cognize.me/pythonAdress/
 https://cognize.me/r-outer/
 https://cognize.me/swirl/
 https://cognize.me/r-equal/
@@ -12,11 +11,7 @@ https://cognize.me/win10Gvim/
 https://cognize.me/csdnToHexo/
 https://cognize.me/rstudioAMI/
 https://cognize.me/tuchuang2/
-https://cognize.me/qiniutest/
 https://cognize.me/installhexo3/
-https://cognize.me/facetest/
-https://cognize.me/photos/
-https://cognize.me/hexoinstall/
 https://cognize.me/tuchuang/
 https://cognize.me/rcurlLogin/
 https://cognize.me/r-barplot/
@@ -27,15 +22,7 @@ https://cognize.me/installVundle/
 https://cognize.me/winVim/
 https://cognize.me/installFirefox/
 https://cognize.me/windowsservice/
-https://cognize.me/words4/
 https://cognize.me/software/
-https://cognize.me/words3/
-https://cognize.me/musictest/
-https://cognize.me/words2/
-https://cognize.me/sentences1/
-https://cognize.me/videotest/
-https://cognize.me/words1/
-https://cognize.me/hello/
 https://cognize.me/sshAdd/
 https://cognize.me/Dummy/
 https://cognize.me/density/
@@ -44,9 +31,7 @@ https://cognize.me/p-value/
 https://cognize.me/qq/
 https://cognize.me/installpackage/
 https://cognize.me/rVcov/
-https://cognize.me/test/
 https://cognize.me/lm/
-https://cognize.me/first/
 https://cognize.me/rApply/
 https://cognize.me/rNA/
 https://cognize.me/rLayout/
@@ -87,6 +72,5 @@ https://cognize.me/emacsSwitchWindows/
 https://cognize.me/OpenWeb/
 https://cognize.me/NewtonsoftJson/
 https://cognize.me/about/
-https://cognize.me/personal/
 https://cognize.me/algorithm/
 https://cognize.me/linuxStudy/

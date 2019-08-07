@@ -120,26 +120,6 @@
   </entry>
   
   <entry>
-    <title>简明python教程中地址簿程序的代码实现</title>
-    <link href="https://cognize.me/pythonAdress/"/>
-    <id>https://cognize.me/pythonAdress/</id>
-    <published>2015-09-22T13:28:01.000Z</published>
-    <updated>2015-09-22T14:59:49.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>在《简明python教程》中，作者为我们留了一个问题，即设计一个地址簿程序，改程序可以对人的地址等信息进行编辑，具体编辑内容包括对联系人信息的增删改查。我自己写了个实现的小程序，不足之处，希望各位指明，谢谢。<a id="more"></a><br>源码如下：</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># encoding: utf-8</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> cPickle <span class="keyword">as</span> p</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">adress</span>:</span></span><br><span class="line">    filePath=<span class="string">'adress.txt'</span></span><br><span class="line">    adressList=&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> os.path.exists(self.filePath):</span><br><span class="line">            f=file(self.filePath)</span><br><span class="line">            self.adressList=p.load(f)</span><br><span class="line">            f.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">save</span><span class="params">(self)</span>:</span></span><br><span class="line">        f=file(self.filePath,<span class="string">'w'</span>)</span><br><span class="line">        p.dump(self.adressList,f)</span><br><span class="line">        f.close()</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">isExist</span><span class="params">(self,name)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> name <span class="keyword">in</span> self.adressList:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add</span><span class="params">(self,name,phone,adress)</span>:</span></span><br><span class="line">        self.adressList[name]=[phone,adress]</span><br><span class="line">        self.save()</span><br><span class="line">        self.search(name)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Add successfully!!!'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">delete</span><span class="params">(self,name)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> name <span class="keyword">in</span> self.adressList:</span><br><span class="line">            <span class="keyword">del</span> self.adressList[name]</span><br><span class="line">            <span class="keyword">print</span> <span class="string">'Delete successfully!!!'</span></span><br><span class="line">            self.save()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">'The person you input is not exist in adressList'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">modify</span><span class="params">(self,name,phone,adress)</span>:</span></span><br><span class="line">        self.adressList[name]=[phone,adress]</span><br><span class="line">        self.save()</span><br><span class="line">        self.search(name)</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'Modify successfully!!!'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">search</span><span class="params">(self,name)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> name <span class="keyword">in</span> self.adressList:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">'name:%s ,phone:%s ,adress:%s '</span>%(name,self.adressList[name][<span class="number">0</span>],self.adressList[name][<span class="number">1</span>])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">'The person you input is not exist'</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">show</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">print</span> <span class="string">'name    phone      adress'</span></span><br><span class="line">        <span class="keyword">for</span> name,info <span class="keyword">in</span> self.adressList.items():</span><br><span class="line">            <span class="keyword">print</span> name,info[<span class="number">0</span>],info[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">run</span><span class="params">(self)</span>:</span></span><br><span class="line">            <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                command=raw_input(<span class="string">"please input command(add/del/modify/search/show):"</span>)</span><br><span class="line">                <span class="keyword">if</span> command==<span class="string">'add'</span>:</span><br><span class="line">                    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                        name=raw_input(<span class="string">'please input name you wanna add:'</span>)</span><br><span class="line">                        <span class="keyword">if</span> <span class="keyword">not</span> ad.isExist(name):</span><br><span class="line">                            phone=raw_input(<span class="string">'please input the phone of %s:'</span>%(name))</span><br><span class="line">                            adress=raw_input(<span class="string">'please input the adress of %s:'</span>%(name))</span><br><span class="line">                            ad.add(name,phone,adress)</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            <span class="keyword">print</span> <span class="string">'The person you input has exist.'</span></span><br><span class="line">                        flag=raw_input(<span class="string">'Do you want to continue to add?(y/n):'</span>)</span><br><span class="line">                        <span class="keyword">if</span> flag==<span class="string">'y'</span> <span class="keyword">or</span> flag==<span class="string">'Y'</span>:</span><br><span class="line">                            <span class="keyword">continue</span></span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">elif</span> command==<span class="string">'del'</span>:</span><br><span class="line">                    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                        name=raw_input(<span class="string">'please input name you wanna delete:'</span>)</span><br><span class="line">                        ad.delete(name)</span><br><span class="line">                        flag=raw_input(<span class="string">'Do you want to continue to delete?(y/n):'</span>)</span><br><span class="line">                        <span class="keyword">if</span> flag==<span class="string">'y'</span> <span class="keyword">or</span> flag==<span class="string">'Y'</span>:</span><br><span class="line">                            <span class="keyword">continue</span></span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">elif</span> command==<span class="string">'modify'</span>:</span><br><span class="line">                    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                        name=raw_input(<span class="string">'Please input name you wanna modify:'</span>)</span><br><span class="line">                        <span class="keyword">if</span> ad.isExist(name):</span><br><span class="line">                            phone=raw_input(<span class="string">'please input the phone of %s:'</span>%(name))</span><br><span class="line">                            <span class="keyword">if</span> phone==<span class="string">''</span>:</span><br><span class="line">                                phone=ad.adressList[name][<span class="number">0</span>]</span><br><span class="line">                            adress=raw_input(<span class="string">'please input the adress of %s:'</span>%(name))</span><br><span class="line">                            <span class="keyword">if</span> adress==<span class="string">''</span>:</span><br><span class="line">                                adress=ad.adressList[name][<span class="number">1</span>]</span><br><span class="line">                            ad.modify(name,phone,adress)</span><br><span class="line">                        <span class="keyword">else</span>:</span><br><span class="line">                            <span class="keyword">print</span> <span class="string">'The person you input is not exist.'</span></span><br><span class="line">                        flag=raw_input(<span class="string">'Do you want to continue to modify?(y/n):'</span>)</span><br><span class="line">                        <span class="keyword">if</span> flag==<span class="string">'y'</span> <span class="keyword">or</span> flag==<span class="string">'Y'</span>:</span><br><span class="line">                            <span class="keyword">continue</span></span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">elif</span> command==<span class="string">'search'</span>:</span><br><span class="line">                    <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                        name=raw_input(<span class="string">'Please input name you manna search:'</span>)</span><br><span class="line">                        ad.search(name)</span><br><span class="line">                        flag=raw_input(<span class="string">'Do you want to continue search?(y/n):'</span>)</span><br><span class="line">                        <span class="keyword">if</span> flag==<span class="string">'y'</span> <span class="keyword">or</span> flag==<span class="string">"Y"</span>:</span><br><span class="line">                            <span class="keyword">continue</span></span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">elif</span> command==<span class="string">'show'</span>:</span><br><span class="line">                    ad.show()</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">print</span> <span class="string">'wrong command.'</span></span><br><span class="line">                flag=raw_input(<span class="string">'Do you wanna continue?(y/n):'</span>)</span><br><span class="line">                <span class="keyword">if</span> flag==<span class="string">'y'</span> <span class="keyword">or</span> flag==<span class="string">'Y'</span>:</span><br><span class="line">                    <span class="keyword">continue</span></span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ad=adress()</span><br><span class="line">ad.run()</span><br></pre></td></tr></table></figure><p>大体的思路是：<br>1.定义一个地址簿类，所有的操作都由该类去实现；<br>2.定义两个公共变量filepath和adressList，前者用来存储地址文件路径，后缀存储地址簿内容；<br>3.程序运行时先通过读取地址文件获得已经存在的内容（如果没有，则创建之）；<br>4.程序的基本操作就是对联系人信息的增删改查，每次操作完立刻保存到地址文件里；<br>5.因为用户可能不止要操作一个联系人信息，所以通过while让用户可以更方便的联系操作；<br>这里有几点说明：<br>1.其实并不一定要每次操作都保存到文件，可以等用户在退出程序时一次性保存到文件，这样效率更高，但是如果用户在这期间输入了很多数据，突然出现的不可预知的情况，导致程序崩溃，会丢掉很多信息；<br>2.修改操作比其它操作多一些代码是因为先进行了判断该name是否存在，如果存在才允许用户输入phone、adress信息，如果等到所有信息都输入完才检查name是否存在，可能会出现用户输入了name、phone、adress之后才发现输入的是无效值，浪费了更多的时间。<br>3.因为联系人其实可以有很多信息，大家可以在name、phone、adress的基础上按需补充。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;在《简明python教程》中，作者为我们留了一个问题，即设计一个地址簿程序，改程序可以对人的地址等信息进行编辑，具体编辑内容包括对联系人信息的增删改查。我自己写了个实现的小程序，不足之处，希望各位指明，谢谢。
-    
-    </summary>
-    
-    
-      <category term="Python" scheme="https://cognize.me/tags/Python/"/>
-    
-  </entry>
-  
-  <entry>
     <title>R语言之outer函数</title>
     <link href="https://cognize.me/r-outer/"/>
     <id>https://cognize.me/r-outer/</id>
@@ -307,28 +287,6 @@
   </entry>
   
   <entry>
-    <title>七牛图片测试</title>
-    <link href="https://cognize.me/qiniutest/"/>
-    <id>https://cognize.me/qiniutest/</id>
-    <published>2015-08-02T09:45:01.000Z</published>
-    <updated>2015-08-02T14:56:10.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>前七牛原图后七牛参数控制图：</p><a id="more"></a><p><img src="/img/loading.png" data-original="https://picture.cognize.me/public/view/2014-11-18-1.jpg" alt><br><img src="/img/loading.png" data-original="https://picture.cognize.me/public/view/2014-11-18-1.jpg?imageslim" alt><br><img src="/img/loading.png" data-original="https://picture.cognize.me/public/view/2014-11-19-lm.jpg" alt><br><img src="/img/loading.png" data-original="https://picture.cognize.me/public/view/2014-11-19-lm.jpg?imageslim" alt><br><img src="/img/loading.png" data-original="https://picture.cognize.me/public/view/2014-11-20-installpackage.jpg" alt><br><img src="/img/loading.png" data-original="https://picture.cognize.me/public/view/2014-11-20-installpackage.jpg?imageslim" alt></p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前七牛原图后七牛参数控制图：&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="hexo" scheme="https://cognize.me/tags/hexo/"/>
-    
-      <category term="test" scheme="https://cognize.me/tags/test/"/>
-    
-  </entry>
-  
-  <entry>
     <title>安装最新版hexo(hexo 3)</title>
     <link href="https://cognize.me/installhexo3/"/>
     <id>https://cognize.me/installhexo3/</id>
@@ -340,69 +298,6 @@
     <summary type="html">
     
       安装最新版hexo，即hexo 3
-    
-    </summary>
-    
-    
-      <category term="hexo" scheme="https://cognize.me/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>表情测试</title>
-    <link href="https://cognize.me/facetest/"/>
-    <id>https://cognize.me/facetest/</id>
-    <published>2015-07-26T14:42:18.000Z</published>
-    <updated>2015-08-02T10:53:55.000Z</updated>
-    
-    <content type="html"><![CDATA[<p> aaa:smiley:bbb:boom:ccc<br>ddd:worried:eee<br>世界:ghost:你好:ghost:哈哈哈<br>hello:ghost::ghost:world<br>new:ghost: :ghost: :ghost: :ghost:world</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt; aaa:smiley:bbb:boom:ccc&lt;br&gt;ddd:worried:eee&lt;br&gt;世界:ghost:你好:ghost:哈哈哈&lt;br&gt;hello:ghost::ghost:world&lt;br&gt;new:ghost: :ghost: :ghost: :ghost:wor
-      
-    
-    </summary>
-    
-    
-      <category term="hexo" scheme="https://cognize.me/tags/hexo/"/>
-    
-      <category term="test" scheme="https://cognize.me/tags/test/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>相册测试</title>
-    <link href="https://cognize.me/photos/"/>
-    <id>https://cognize.me/photos/</id>
-    <published>2015-07-26T10:56:25.000Z</published>
-    <updated>2015-07-29T16:23:43.000Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-      <category term="hexo" scheme="https://cognize.me/tags/hexo/"/>
-    
-      <category term="test" scheme="https://cognize.me/tags/test/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hexo安装与卸载插件</title>
-    <link href="https://cognize.me/hexoinstall/"/>
-    <id>https://cognize.me/hexoinstall/</id>
-    <published>2015-07-23T16:31:20.000Z</published>
-    <updated>2015-07-29T15:15:56.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>hexo安装xxx插件<br>npm install xxx –save<br>hexo卸载xxx插件<br>npm uninstall xxx</p>]]></content>
-    
-    <summary type="html">
-    
-      hexo安装与卸载插件
     
     </summary>
     
@@ -430,6 +325,112 @@
       <category term="hexo" scheme="https://cognize.me/tags/hexo/"/>
     
       <category term="图床" scheme="https://cognize.me/tags/%E5%9B%BE%E5%BA%8A/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>利用R包RCurl登录新浪微博</title>
+    <link href="https://cognize.me/rcurlLogin/"/>
+    <id>https://cognize.me/rcurlLogin/</id>
+    <published>2015-07-21T09:00:40.000Z</published>
+    <updated>2015-08-02T14:11:15.000Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h1><p>在火狐浏览器上安装插件“Live http headers”，重启浏览器。<br>在火狐浏览器上手动登录新浪微博。<br>手动成功登录后，鼠标右键单击“查看页面信息”，弹出如下信息：</p><a id="more"></a><p><img src="/img/loading.png" data-original="https://picture.cognize.me/cognize/rplot/2015-7-21-RCurlLogin.png?imageslim" alt="弹出框"><br>选择“Headers”,点击“save as”，将内容保存为”weibo”。打开下载好的”weibo”，你会发现内容分为<br>两部分，即“Request Headers”和“Response Header”。这里我们只需要“Request Headers”的信息，<br>将内容：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Host: xxx</span><br><span class="line">User-Agent: xxx</span><br><span class="line">Accept: xxx</span><br><span class="line">Accept-Language: xxx</span><br><span class="line">Accept-Encoding: xxx</span><br><span class="line">Referer: xxx</span><br><span class="line">Cookie: xxx</span><br><span class="line">Connection: xxx</span><br></pre></td></tr></table></figure><p>修改成程序需要的格式即可，具体形式在代码中会详述。</p><h1 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">require(RCurl)</span><br><span class="line">myHttpheader&lt;- c(</span><br><span class="line">&quot;Host&quot;=&quot;xxx&quot;,</span><br><span class="line">&quot;User-Agent&quot;=&quot;xxx&quot;,</span><br><span class="line">&quot;Accept&quot;=&quot;xxx&quot;,</span><br><span class="line">&quot;Accept-Language&quot;=&quot;xxx&quot;,</span><br><span class="line">&quot;Accept-Encoding&quot;=&quot;xxx&quot;,</span><br><span class="line">&quot;Referer&quot;=&quot;xxx&quot;,</span><br><span class="line">&quot;Cookie&quot;=&quot;xxx&quot;,</span><br><span class="line">&quot;Connection&quot;=&quot;xxx&quot;</span><br><span class="line">)#本段代码对应“weibo”文件中的“Request Headers”，“xxx”换成大家文件中的真实值</span><br><span class="line">d =debugGatherer()</span><br><span class="line">cHandle&lt;- getCurlHandle(httpheader=myHttpheader,followlocation=1,</span><br><span class="line">          debugfunction=d$update,verbose=TRUE)</span><br><span class="line">temp&lt;- getURL(&quot;http://d.weibo.com/&quot;,curl=cHandle,.encoding=&quot;gbk&quot;)</span><br><span class="line">grep(&quot;yourWeiboName&quot;,temp)#&quot;yourWeiboName&quot;请替换成大家真实的微博用户名，大小写一定要一致</span><br></pre></td></tr></table></figure><p>运行上述代码，如果登录成功，会返回结果“1”，否则为“integer(0)”。<br>当然，本代码也可以用来登录其它网站，方法相同，大家可以自己尝试。<br>参考文章：<em><a href="http://cos.name/cn/topic/17816/" rel="external nofollow noopener noreferrer" target="_blank">http://cos.name/cn/topic/17816/</a></em><br><em><a href="http://www.xueningzhu.com/用rcurl登录人人网/" rel="external nofollow noopener noreferrer" target="_blank">http://www.xueningzhu.com/用rcurl登录人人网/</a></em></p>]]></content>
+    
+    <summary type="html">
+    
+      利用R包RCurl模拟登录新浪微博
+    
+    </summary>
+    
+    
+      <category term="R" scheme="https://cognize.me/tags/R/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>R语言中barplot函数的用法</title>
+    <link href="https://cognize.me/r-barplot/"/>
+    <id>https://cognize.me/r-barplot/</id>
+    <published>2015-07-18T08:59:37.000Z</published>
+    <updated>2015-08-13T08:10:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>barplot函数在R中是一个画条线图的函数。<br>最简单的用法，即当参数为一个向量时，用法如例子所示：</p><a id="more"></a><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; mydata&lt;-c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line">&gt; barplot(mydata)</span><br></pre></td></tr></table></figure><p>结果如下图所示：<br><img src="/img/loading.png" data-original="https://picture.cognize.me/cognize/rplot/2015-7-18-r-barplot.png?imageslim" alt><br>结果图形的x轴被分成了五份，因为mydata中一共有五个数据，y轴则对应了每个数据的具体数值。</p><p>另外，稍复杂的用法是参数为矩阵的情况，用法如下：</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; mydata&lt;-data.frame(aaa=c(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>),bbb=c(<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>))</span><br><span class="line">&gt; barplot(as.matrix(mydata))</span><br></pre></td></tr></table></figure><p>结果如下图所示：<br><img src="/img/loading.png" data-original="https://picture.cognize.me/cognize/rplot/2015-7-18-r-barplot2.png?imageslim" alt><br>结果图形的x轴被分成两部分，因为mydata一共有两个元素，即aaa和bbb，x轴的默认表情就是mydata的列名，而每列中的数据依次叠加在一起，高度为各自的数值。如果想将数据中每列的图形分开，可以使用参数beside，即：</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; barplot(as.matrix(mydata),beside=<span class="literal">T</span>)</span><br></pre></td></tr></table></figure><p>结果如下图所示：<br><img src="/img/loading.png" data-original="https://picture.cognize.me/cognize/rplot/2015-7-18-r-barplot3.png?imageslim" alt><br>此时每列的图形并列排列。<br>此外，barplot函数中还包含col、names.arg等参数，其中col用来控制图像的颜色、names.arg用来设置x轴标签，具体用法大家可自行探索。</p>]]></content>
+    
+    <summary type="html">
+    
+      R语言中barplot函数的用法
+    
+    </summary>
+    
+    
+      <category term="R" scheme="https://cognize.me/tags/R/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>R语言读取XML文件</title>
+    <link href="https://cognize.me/rreadxml/"/>
+    <id>https://cognize.me/rreadxml/</id>
+    <published>2015-07-12T09:46:30.000Z</published>
+    <updated>2015-08-13T08:06:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>首先要加载需要的R包，没有安装的童鞋要提前安装。</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; <span class="keyword">library</span>(RCurl)        <span class="comment"># 加载R包</span></span><br><span class="line">&gt; <span class="keyword">library</span>(XML)</span><br></pre></td></tr></table></figure><p>本文以读取在线xml文件<em><a href="http://www.w3school.com.cn/example/xdom/books.xml" rel="external nofollow noopener noreferrer" target="_blank">http://www.w3school.com.cn/example/xdom/books.xml</a></em>为例。</p><a id="more"></a><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; url&lt;-<span class="string">"http://www.w3school.com.cn/example/xdom/books.xml"</span>  <span class="comment">#注，也可以为url复制本地文件的路径</span></span><br><span class="line">&gt; doc&lt;-xmlTreeParse(getURL(url),useInternal = <span class="literal">TRUE</span>)    <span class="comment">#获取文件</span></span><br></pre></td></tr></table></figure><p>该xml文件中存储了很多”book”的信息，假如我们想读取第一本书的”title”的值,方法如下：</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; xpathSApply(doc, <span class="string">"/bookstore/book[1]/title"</span>, xmlValue)</span><br></pre></td></tr></table></figure><p>或者</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt; xpathSApply(doc, <span class="string">"//book[1]/title"</span>, xmlValue)</span><br></pre></td></tr></table></figure><p>如果函数中填的是完整的节点路径（如”/bookstore/book[1]/title”），则要在节点名称前加”&quot;;如果函数中填的不是完整节点路径（如第二种方法），路径中的第一个节点是几级节点，该节点前就要加几个”&quot;，因为”book”为二级节点，所以其前加两个”&quot;，最终的路径形式为：”//book[1]/title”。因为在”bookstore”节点下有很多”book”节点，而我们想要读取的是第一步的”title”值，所以”book”节点后要加下标，即”book[1]”。如果不加下标，会读取所有book节点的title信息。</p><p>如果我们想要读取第一个”book”节点子节点”title”中属性”lang”的值，方法如下：</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; title&lt;-getNodeSet(doc, <span class="string">"/bookstore/book[1]/title"</span>)</span><br><span class="line">&gt; lang&lt;-sapply(title, xmlGetAttr, <span class="string">"lang"</span>)</span><br></pre></td></tr></table></figure><p>或者  </p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; title&lt;-getNodeSet(doc, <span class="string">"//book[1]/title"</span>)</span><br><span class="line">&gt; lang&lt;-sapply(title, xmlGetAttr, <span class="string">"lang"</span>)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      R语言读取XML文件
+    
+    </summary>
+    
+    
+      <category term="R" scheme="https://cognize.me/tags/R/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【转】R语言读取EXCEL文件的各种方法</title>
+    <link href="https://cognize.me/readexcel/"/>
+    <id>https://cognize.me/readexcel/</id>
+    <published>2015-06-29T13:27:31.000Z</published>
+    <updated>2015-08-13T07:55:47.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>注：本文为转载，原文地址：<em><a href="http://www.biostatistic.net/thread-35-1-1.html" rel="external nofollow noopener noreferrer" target="_blank">http://www.biostatistic.net/thread-35-1-1.html</a></em></p><p>R语言读取EXCEL文件的各种方法<br>最近初学R语言，在R语言读入EXCEL数据格式文件的问题上遇到了困难，经过在网上搜索解决了这一问题，下面归纳几种方法，供大家分享：</p><a id="more"></a><p>第一：R中读取excel文件中的数据的路径：</p><p>假定在您的电脑有一个excel文件，原始的文件路径是：D:\work\data\1，如果直接把这个路径拷贝到R中，就会出现错误，原因是：\是escape character（转义符），&#92;&#92;才是真正的\字符，或者用/因此，在R中有两种方法读取该路径：<br>1：在R中输入一下路径：D:&#92;&#92;work&#92;&#92;data&#92;&#92;1<br>2：在R中输入一下路径：D:&#92;&#92;work&#92;&#92;data&#92;&#92;1</p><p>第二：R中读取excel文件中的数据的方法：</p><p>read.table(),read.csv(),read.delim()直接读取EXCEl文件时，都会遇到一下问题：“在读取‘.xls’的TableHeader时遇到不完全的最后一行”。解决的方法有以下几种：假如文件1.1中是一个6乘以2的矩阵，元素为：</p><p>1 23<br>2 24<br>3 25<br>4 26<br>5 27<br>6 28 </p><p>方法1：xls另存为csv格式然后用read.csv：<br>具体过程如下：</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&gt; data&lt;-read.csv(<span class="string">"D:\\work\\data\\1.csv"</span>)</span><br><span class="line">&gt; data</span><br><span class="line">  X1 X23</span><br><span class="line"><span class="number">1</span>  <span class="number">2</span>    <span class="number">24</span></span><br><span class="line"><span class="number">2</span>  <span class="number">3</span>    <span class="number">25</span></span><br><span class="line"><span class="number">3</span>  <span class="number">4</span>    <span class="number">26</span></span><br><span class="line"><span class="number">4</span>  <span class="number">5</span>    <span class="number">27</span></span><br><span class="line"><span class="number">5</span>  <span class="number">6</span>    <span class="number">28</span></span><br><span class="line">&gt; data&lt;-read.csv(<span class="string">"D:\\work\\data\\1.csv"</span>,header = <span class="literal">F</span>)</span><br><span class="line">&gt; data</span><br><span class="line">  V1    V2</span><br><span class="line"><span class="number">1</span>  <span class="number">1</span> <span class="number">23333</span></span><br><span class="line"><span class="number">2</span>  <span class="number">2</span>    <span class="number">24</span></span><br><span class="line"><span class="number">3</span>  <span class="number">3</span>    <span class="number">25</span></span><br><span class="line"><span class="number">4</span>  <span class="number">4</span>    <span class="number">26</span></span><br><span class="line"><span class="number">5</span>  <span class="number">5</span>    <span class="number">27</span></span><br><span class="line"><span class="number">6</span>  <span class="number">6</span>    <span class="number">28</span></span><br><span class="line">&gt; data&lt;-read.csv(<span class="string">"D:\\work\\data\\1.csv"</span>,header = <span class="literal">T</span>)</span><br><span class="line">&gt; data</span><br><span class="line">  X1 X23333</span><br><span class="line"><span class="number">1</span>  <span class="number">2</span>    <span class="number">24</span></span><br><span class="line"><span class="number">2</span>  <span class="number">3</span>    <span class="number">25</span></span><br><span class="line"><span class="number">3</span>  <span class="number">4</span>    <span class="number">26</span></span><br><span class="line"><span class="number">4</span>  <span class="number">5</span>    <span class="number">27</span></span><br><span class="line"><span class="number">5</span>  <span class="number">6</span>    <span class="number">28</span></span><br></pre></td></tr></table></figure><p>也就是说header = T（TURE）是默认的状态，在这默认状态下，输出的data矩阵是一个5乘以2的矩阵，第一行作为了data的名字，如果header = F（FALSE），则会现实原始的矩阵结果。</p><p>方法2：xls另存为txt格式然后用read.table：<br>如例子所示：</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt; data&lt;-read.table(<span class="string">"D:\\work\\data\\1.txt"</span>,header = <span class="literal">T</span>)</span><br><span class="line">&gt; data</span><br><span class="line">  X1 X23</span><br><span class="line"><span class="number">1</span>  <span class="number">2</span>  <span class="number">24</span></span><br><span class="line"><span class="number">2</span>  <span class="number">3</span>  <span class="number">25</span></span><br><span class="line"><span class="number">3</span>  <span class="number">4</span>  <span class="number">26</span></span><br><span class="line"><span class="number">4</span>  <span class="number">5</span>  <span class="number">27</span></span><br><span class="line"><span class="number">5</span>  <span class="number">6</span>  <span class="number">28</span></span><br><span class="line">&gt; data&lt;-read.table(<span class="string">"D:\\work\\data\\1.txt"</span>,header = <span class="literal">F</span>)</span><br><span class="line">&gt; data</span><br><span class="line">  V1 V2</span><br><span class="line"><span class="number">1</span>  <span class="number">1</span> <span class="number">23</span></span><br><span class="line"><span class="number">2</span>  <span class="number">2</span> <span class="number">24</span></span><br><span class="line"><span class="number">3</span>  <span class="number">3</span> <span class="number">25</span></span><br><span class="line"><span class="number">4</span>  <span class="number">4</span> <span class="number">26</span></span><br><span class="line"><span class="number">5</span>  <span class="number">5</span> <span class="number">27</span></span><br><span class="line"><span class="number">6</span>  <span class="number">6</span> <span class="number">28</span></span><br></pre></td></tr></table></figure><p>方法3：打开EXCEL，全选里面的内容，点击复制，然后在R中输入一下命令：</p><p>data &lt;- read.table(“clipboard”, header = T, sep = ‘\t’)<br>结果如下所示：</p><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&gt; data &lt;- read.table(<span class="string">"clipboard"</span>, header = <span class="literal">T</span>, sep = <span class="string">'\t'</span>)</span><br><span class="line">&gt; data</span><br><span class="line">  X1 X23</span><br><span class="line"><span class="number">1</span>  <span class="number">2</span>  <span class="number">24</span></span><br><span class="line"><span class="number">2</span>  <span class="number">3</span>  <span class="number">25</span></span><br><span class="line"><span class="number">3</span>  <span class="number">4</span>  <span class="number">26</span></span><br><span class="line"><span class="number">4</span>  <span class="number">5</span>  <span class="number">27</span></span><br><span class="line"><span class="number">5</span>  <span class="number">6</span>  <span class="number">28</span></span><br><span class="line">&gt; data &lt;- read.table(<span class="string">"clipboard"</span>, header = <span class="literal">F</span>, sep = <span class="string">'\t'</span>)</span><br><span class="line">&gt; data</span><br><span class="line">  V1 V2</span><br><span class="line"><span class="number">1</span>  <span class="number">1</span> <span class="number">23</span></span><br><span class="line"><span class="number">2</span>  <span class="number">2</span> <span class="number">24</span></span><br><span class="line"><span class="number">3</span>  <span class="number">3</span> <span class="number">25</span></span><br><span class="line"><span class="number">4</span>  <span class="number">4</span> <span class="number">26</span></span><br><span class="line"><span class="number">5</span>  <span class="number">5</span> <span class="number">27</span></span><br><span class="line"><span class="number">6</span>  <span class="number">6</span> <span class="number">28</span></span><br></pre></td></tr></table></figure><p>使用这种方法的时候一定要注意复制！剪切板里面没有内容是无法运行的！以上是三种方法，如果还有别的更好的，请大家补充，谢谢！</p>]]></content>
+    
+    <summary type="html">
+    
+      R语言读取EXCEL文件的各种方法
+    
+    </summary>
+    
+    
+      <category term="转载" scheme="https://cognize.me/tags/%E8%BD%AC%E8%BD%BD/"/>
+    
+      <category term="R" scheme="https://cognize.me/tags/R/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>【转】R中的逻辑运算符&amp;, &amp;&amp;, |, ||</title>
+    <link href="https://cognize.me/rlogic/"/>
+    <id>https://cognize.me/rlogic/</id>
+    <published>2015-06-11T13:33:15.000Z</published>
+    <updated>2015-08-13T03:47:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>注：本文为转载，原文地址：<em><a href="http://blog.qiuworld.com:8080/archives/2921" rel="external nofollow noopener noreferrer" target="_blank">http://blog.qiuworld.com:8080/archives/2921</a></em><br>在R中，逻辑运算符(logical operator)有!, &amp;, &amp;&amp;, |, ||, xor, isTRUE等等。</p><p>问题：&amp;与&amp;&amp;, |与||有什么区别呢？它们是否是一致的呢？</p><p>答：否。我们将&amp;和|称为短逻辑符，&amp;&amp;及||称为长逻辑符。长逻辑符只比较左边和右边的第一个元素，而短逻辑符会比较所以的。我们来看示例：</p><a id="more"></a><figure class="highlight r"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&gt; a&lt;-c(<span class="literal">TRUE</span>, <span class="literal">FALSE</span>, <span class="literal">TRUE</span>, <span class="literal">FALSE</span>)</span><br><span class="line">&gt; b&lt;-c(<span class="literal">FALSE</span>, <span class="literal">FALSE</span>, <span class="literal">TRUE</span>, <span class="literal">TRUE</span>)</span><br><span class="line">&gt; c&lt;-c(<span class="literal">TRUE</span>, <span class="literal">FALSE</span>, <span class="literal">FALSE</span>, <span class="literal">FALSE</span>)</span><br><span class="line">&gt; a &amp; b</span><br><span class="line">[<span class="number">1</span>] <span class="literal">FALSE</span> <span class="literal">FALSE</span>  <span class="literal">TRUE</span> <span class="literal">FALSE</span></span><br><span class="line">&gt; a &amp;&amp; b</span><br><span class="line">[<span class="number">1</span>] <span class="literal">FALSE</span></span><br><span class="line">&gt; a &amp; c</span><br><span class="line">[<span class="number">1</span>]  <span class="literal">TRUE</span> <span class="literal">FALSE</span> <span class="literal">FALSE</span> <span class="literal">FALSE</span></span><br><span class="line">&gt; a &amp;&amp; c</span><br><span class="line">[<span class="number">1</span>] <span class="literal">TRUE</span></span><br><span class="line">&gt; a | b</span><br><span class="line">[<span class="number">1</span>]  <span class="literal">TRUE</span> <span class="literal">FALSE</span>  <span class="literal">TRUE</span>  <span class="literal">TRUE</span></span><br><span class="line">&gt; a || b</span><br><span class="line">[<span class="number">1</span>] <span class="literal">TRUE</span></span><br><span class="line">&gt; a | c</span><br><span class="line">[<span class="number">1</span>]  <span class="literal">TRUE</span> <span class="literal">FALSE</span>  <span class="literal">TRUE</span> <span class="literal">FALSE</span></span><br><span class="line">&gt; a || c</span><br><span class="line">[<span class="number">1</span>] <span class="literal">TRUE</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;注：本文为转载，原文地址：&lt;em&gt;&lt;a href=&quot;http://blog.qiuworld.com:8080/archives/2921&quot; rel=&quot;external nofollow noopener noreferrer&quot; target=&quot;_blank&quot;&gt;http://blog.qiuworld.com:8080/archives/2921&lt;/a&gt;&lt;/em&gt;&lt;br&gt;在R中，逻辑运算符(logical operator)有!, &amp;amp;, &amp;amp;&amp;amp;, |, ||, xor, isTRUE等等。&lt;/p&gt;
+&lt;p&gt;问题：&amp;amp;与&amp;amp;&amp;amp;, |与||有什么区别呢？它们是否是一致的呢？&lt;/p&gt;
+&lt;p&gt;答：否。我们将&amp;amp;和|称为短逻辑符，&amp;amp;&amp;amp;及||称为长逻辑符。长逻辑符只比较左边和右边的第一个元素，而短逻辑符会比较所以的。我们来看示例：&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="转载" scheme="https://cognize.me/tags/%E8%BD%AC%E8%BD%BD/"/>
+    
+      <category term="R" scheme="https://cognize.me/tags/R/"/>
     
   </entry>
   
